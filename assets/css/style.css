@@ -504,7 +504,7 @@ div.dataTables_wrapper div.dataTables_filter input{
 }
 
 .imprimir {
-  color: #00BCD4;
+  color: #009688;
   padding-left: 10px;
 }
 
@@ -517,7 +517,7 @@ div.dataTables_wrapper div.dataTables_filter input{
 }
 
 .welcome-title {
-  background: #00bcd4;
+  background: #009688;
   color: #fff;
   padding: 5px;
   width: 400px;
@@ -529,7 +529,7 @@ div.dataTables_wrapper div.dataTables_filter input{
 }
 
 .publicidade {
-  background: #00BCD4;
+  background: #009688;
   color: #fff;
   height: 200px;
 }
@@ -537,9 +537,30 @@ div.dataTables_wrapper div.dataTables_filter input{
 .publicidade-sobre {
   color: #fff;
   height: 300px;
-  background: #00bcd4;
+  background: #009688;
 }
 
 .search-title {
-  color: #00bcd4;
+  color: #009688;
+}
+
+#public-header .mdl-layout__header {
+  background-color: #009688;
+}
+
+#public-header .mdl-layout-title {
+  background: #009688;
+}
+
+#public-header .mdl-layout__header-row .mdl-navigation__link:hover {
+  background: #00877a;
+}
+
+.btn-pesquisar {
+  background: #009688;
+  color: #fff;
+}
+
+.btn-pesquisar:hover {
+  background: #00877a;
 }

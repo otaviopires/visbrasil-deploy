@@ -14,12 +14,13 @@
 	<link rel="icon" href="<?= base_url(); ?>assets/imagens/favicon.ico" />
 </head>
 <body>
-	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+	<div id="public-header" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<!-- Começa o Header -->
 		<header class="mdl-layout__header">
 			<div class="mdl-layout__header-row mdl-shadow--4dp">
 				<!-- Titulo -->
-				<a href="<?= base_url()?>Home"><span class="mdl-layout-title">VISBRASIL</span></a>
+				<a href="<?= base_url()?>Home"><span class="mdl-layout-title">SAÚDE & LEIS BRASIL</span></a>
+				
 				<div class="mdl-layout-spacer"></div>
 				<nav class="mdl-navigation mdl-layout--large-screen-only">
                     <a class="mdl-navigation__link" href="<?= base_url()?>Home">Início</a>
