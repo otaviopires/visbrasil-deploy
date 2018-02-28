@@ -10,6 +10,58 @@
                     <input class="mdl-textfield__input" type="text" id="PESQUISE_ASSUNTO" name="PESQUISE_ASSUNTO" required>
                     <label class="mdl-textfield__label" for="PESQUISE_ASSUNTO">Pesquise no VISBRASIL</label>
                 </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-cell--6-col-desktop">
+								<select class="browser-default" name="legislacao" id="legislacao" required>
+									<option value="" disabled selected>Legislação</option>
+									<?php foreach($legislacoes as $legislacao){?>
+									<option value="<?= $legislacao->CO_SEQ_LEGISLACAO?>">
+										<?= $legislacao->RN_TEXTUAL?>
+									</option>
+									<?php } ?>
+								</select>
+							</div>
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--6-col-desktop ">
+								<select class="browser-default" name="areaAtuacao" id="areaAtuacao" required>
+									<option value="" disabled selected>Área de Atuação</option>
+									<?php foreach($areaAtuacao as $area){?>
+									<option value="<?= $area->CO_AREA_ATUACAO?>">
+										<?= $area->DS_AREA_ATUACAO?>
+									</option>
+									<?php } ?>
+								</select>
+							</div>
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-cell--6-col-desktop">
+								<select class="browser-default" name="assunto" id="assunto" required>
+									<option value="" disabled selected>Assunto</option>
+									<?php foreach($assuntos as $assunto){?>
+									<option value="<?= $assunto->CO_SEQ_ASSUNTO?>">
+										<?= $assunto->DS_ASSUNTO?>
+									</option>
+									<?php } ?>
+								</select>
+							</div>
+
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--6-col-desktop">
+								<select class="browser-default" name="subassunto" id="subassunto" required>
+									<option value="" disabled selected>Subassunto</option>
+									<?php foreach($subassuntos as $subassunto){?>
+									<option value="<?= $subassunto->CO_SEQ_ASSUNTO?>">
+										<?= $subassunto->DS_ASSUNTO?>
+									</option>
+									<?php } ?>
+								</select>
+							</div>
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--6-col-desktop">
+								<select class="browser-default" name="tema" id="tema" required>
+									<option value="" disabled selected>Tema</option>
+									<?php foreach($temas as $tema){?>
+									<option value="<?= $tema->CO_SEQ_TEMA?>">
+										<?= $tema->DS_TEMA?>
+									</option>
+									<?php } ?>
+								</select>
+							</div>
                 <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn-pesquisar">
                     Pesquisar
                 </button>
