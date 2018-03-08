@@ -5,7 +5,7 @@ o framework Material Design Lite*/
 
 /*100% na tela*/
 img {
-  max-width: 100% !important; 
+  max-width: 100% !important;
 }
 body{
 	width: 100%;
@@ -19,7 +19,7 @@ body{
 html {
 	width: 100%;
 	height: 100%;
-}	
+}
 
 main {
 	display: block;
@@ -93,7 +93,7 @@ h6 {
   line-height: 24px;
   letter-spacing: 0.04em;
   margin-top: 24px;
-  margin-bottom: 16px; 
+  margin-bottom: 16px;
 }
 
 p {
@@ -102,7 +102,7 @@ p {
   line-height: 24px;
   letter-spacing: 0;
   margin-bottom: 16px;
-}  
+}
 
 
 body {
@@ -110,7 +110,7 @@ body {
 }
 
 .container {
-  background: #fff; 
+  background: #fff;
 }
 
 /* Botões */
@@ -249,7 +249,7 @@ body {
 }
 
 
-/* Card #3f51b5 */ 
+/* Card #3f51b5 */
 
 .mdl-card__title {
  background: #69717a;
@@ -278,7 +278,7 @@ table {
 }
 
 .mdl-data-table tbody tr:hover {
-  background-color: #eee; 
+  background-color: #eee;
 }
 
 
@@ -335,7 +335,7 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 
 .mdl-textfield.is-invalid .mdl-textfield__input {
   border-color:rgba(0,0,0,.50);
-  box-shadow: none; 
+  box-shadow: none;
 }
 
 .mdl-textfield.is-invalid .mdl-textfield__input {
@@ -439,7 +439,7 @@ a:hover {
   overflow: hidden;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
-  vertical-align: middle; 
+  vertical-align: middle;
   z-index: 1;
   will-change: opacity, transform;
   transition: all .3s ease-out;
@@ -449,7 +449,7 @@ a:hover {
 }
 
 .space {
-  margin-left: 45px; 
+  margin-left: 45px;
 }
 
 #space-usuario {
@@ -487,7 +487,7 @@ div.dataTables_wrapper div.dataTables_filter input{
 .result {
   margin-right: 10px;
   padding-right: 10px;
-  width: 300px; 
+  width: 300px;
 }
 
 .results-section-title {
@@ -564,3 +564,23 @@ div.dataTables_wrapper div.dataTables_filter input{
 .btn-pesquisar:hover {
   background: #00877a;
 }
+
+#legdiv,#temadiv,#assuntodiv,#subassuntodiv,#areadiv{
+  visibility: hidden;
+}
+ #finalResult{
+
+
+ list-style: none;
+ background-color: lightgray;
+ margin: 1px;
+ padding: 1px;
+ -moz-border-radius: 3px;
+ -webkit-border-radius: 3px;
+ border-radius: 3px;
+
+ }
+
+ #pesquise,#parametros{
+   visibility:hidden;
+ }

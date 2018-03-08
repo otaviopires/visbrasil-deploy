@@ -73,10 +73,17 @@ class Indexacao_model extends CI_Model{
 		$this->db->insert('tb_indexacao', $dados);
 	}
 
+	public function getLegislacao($search){
+
+  //$this->load->database();
+  $query = $this->db->query("SELECT * FROM tb_indexacao_2  WHERE (DS_TEXTO_MARCACAO='%search%' OR DS_ASSUNTO='%search%' OR DS_SUBASSUNTO='%search%' OR DS_TEMA='%search%' ) ");
+  return $query->result_array();
+ }
+
 	public function getIndexacaoById($id = null){
 		if($id != null){
 			$this->db->select('ind.*, CO_SEQ_INDICE, ass1.DS_ASSUNTO ass1DS_ASSUNTO, ass2.DS_ASSUNTO ass2DS_ASSUNTO, tema.DS_TEMA temaDS_TEMA, areaAtuacao.DS_AREA_ATUACAO areaAtuacaoDS_AREA_ATUACAO');
-			
+
 			// $this->db->join('tb_area_atuacao', 'tb_area_atuacao.CO_AREA_ATUACAO = tb_indexacao.CO_AREA_ATUACAO_ID');
 			// $this->db->join('tb_assunto', 'tb_assunto.CO_SEQ_ASSUNTO = tb_indexacao.CO_SEQ_ASSUNTO_ID');
 			// $this->db->join('tb_subassunto', 'tb_subassunto.CO_SEQ_SUBASSUNTO = tb_indexacao.CO_SEQ_SUBASSUNTO_ID');
