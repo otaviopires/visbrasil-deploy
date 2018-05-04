@@ -74,7 +74,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 /* Production */
-/*
+
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'visbrasil.mysql.uhserver.com',
@@ -96,10 +96,10 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-*/
+
 
 /* Dev */
-
+/*
 $db['default'] = array(
     'dsn'	=> '',
     'hostname' => '127.0.0.1',
@@ -121,3 +121,4 @@ $db['default'] = array(
     'failover' => array(),
     'save_queries' => TRUE
 );
+*/
