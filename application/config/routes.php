@@ -53,6 +53,7 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['search'] = "Home/search";
 
 
 $route['Tema/p'] = "Tema";

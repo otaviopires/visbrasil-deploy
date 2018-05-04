@@ -5,7 +5,7 @@
     <div class="mdl-cell mdl-cell--6-col">
         <div class="search-section">
             <h4 class="search-title">O que deseja saber hoje?</h4>
-            <form method="POST">
+            <form method="POST" action="<?=base_url('search')?>">
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col-desktop">
 
               <p> Escolha o tipo de pesquisa </p>
@@ -13,7 +13,7 @@
             </div>
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-cell--8-col-desktop">
                 <input type="checkbox" id="textcheck" name="textual" value="textual"
-                onclick='toggleLegVisibility'>
+                onclick='toggleLegVisibility()'>
                 <label for="textual">Textual</label>
 
                 <div id='pesquise' class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col-desktop">
@@ -29,17 +29,16 @@
             -->
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-cell--8-col-desktop">
               <input type="checkbox" id="paramcheck" name="parametros" value="parametros"
-              onclick='toggleLegVisibility'>
+              onclick='toggleLegVisibility()'>
               <label for="parametros">Por parametros</label>
             </div>
 
-
                 <div id='legdiv' class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-cell--8-col-desktop">
 								<select class="browser-default" name="legislacao" id="legislacao" >
-									<option value="" disabled selected>Legislação</option>
-									<?php foreach($normas as $tipo_norma){?>
-									<option value="<?= $tipo_norma->CO_TIPO_NORMA?>">
-										<?= $tipo_norma->DS_TIPO_NORMA?>
+									<option value="" disabled selected>Legislação (número norma)</option>
+									<?php foreach($legislacoes as $tipo_norma){?>
+									<option value="<?= $tipo_norma->CO_SEQ_LEGISLACAO?>">
+										<?= $tipo_norma->NU_NORMA ?>
 									</option>
 									<?php } ?>
 								</select>
@@ -98,15 +97,39 @@
 							</div >
               <div class='mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--8-col-desktop'
               </div>
-                <button id='search' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn-pesquisar">
+                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn-pesquisar">
                     Pesquisar
                 </button>
-
-            </form>
-            <ul id="Resultado_search"></ul>
+    </form>
         </div>
-
-
+    <?php if(!is_null($results)): ?>
+    <table id="results" class="mdl-data-table">
+        <thead>
+        <tr>
+            <th>DS_TEXTO_MARCACAO</th>
+            <th>DS_CONTEUDO (LEGISLAÇÃO)</th>
+            <th>DS_TEMA</th>
+            <th>DS_ASSUNTO</th>
+            <th>DS_SUBASSUNTO</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+            foreach ($results as $result):
+                echo
+                    '<tr>'.
+                        '<td>' . mb_strimwidth($result->DS_TEXTO_MARCACAO, 0, 20, "...") .'</td>' .
+                        '<td>' . mb_strimwidth($result->DS_CONTEUDO, 0, 20, "...") . '</td>' .
+                        '<td>' . mb_strimwidth($result->temaDS_TEMA, 0, 20, "...") . '</td>' .
+                        '<td>' . mb_strimwidth($result->ass1DS_ASSUNTO, 0, 20, "...") . '</td>' .
+                        '<td>' . mb_strimwidth($result->ass2DS_ASSUNTO, 0, 20, "...") . '</td>' .
+                    '</tr>'
+                ;
+           endforeach;
+        ?>
+        </tbody>
+    </table>
+    <?php endif; ?>
         <section class="publicidade-section">
             <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--4-col publicidade">
@@ -159,9 +182,17 @@ document.getElementById('paramcheck').onchange = function() {
 
 <script src="https://code.jquery.com/jquery-1.12.3.js"></script>
 <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.material.min.js"></script>
 
 <script>
+    $(document).ready(function () {
+        $('#results').dataTable();
+    });
+</script>
+<script>
 $(document).ready(function(){
+
   $("#textcheck").click(function() {
     var value = $(this).prop("checked");
     if (value==true){
@@ -173,16 +204,17 @@ $(document).ready(function(){
             cache: false,
             data:'search='+$("#PESQUISE_ASSUNTO").val(),
             success: function(response){
-              window.location.href = 'http://localhost/visbrasil/index.php/resultado';
+              //window.location.href = 'http://localhost/visbrasil/index.php/resultado';
 
-
+                console.log(response);
                 error: function(){
                     alert('Error while request..');
                 }
             });
           //  window.location.href = 'http://localhost/visbrasil/index.php/resultado';
 
-        return false;
+        //return false;
+
  });
 
     };

@@ -35,6 +35,39 @@ class Indexacao_model extends CI_Model{
 
 	}
 
+	public function search($like = array(), $distinct = null, $or_like = array(), $limit = null, $offset = null, $order_by = null, $where = array()){
+
+        $this->db->select('ind.*, ass1.DS_ASSUNTO ass1DS_ASSUNTO, ass2.DS_ASSUNTO ass2DS_ASSUNTO, tema.DS_TEMA temaDS_TEMA, areaAtuacao.DS_AREA_ATUACAO areaAtuacaoDS_AREA_ATUACAO, tb_legislacao.DS_CONTEUDO');
+        $this->db->from('tb_indexacao as ind');
+        $this->db->join('tb_assunto as ass1', 'ass1.CO_SEQ_ASSUNTO = ind.CO_SEQ_ASSUNTO_ID');
+        $this->db->join('tb_assunto as ass2', 'ass2.CO_SEQ_ASSUNTO = ind.CO_SEQ_SUBASSUNTO_ID');
+        $this->db->join('tb_tema as tema', 'tema.CO_SEQ_TEMA = ind.CO_SEQ_TEMA_ID');
+        $this->db->join('tb_area_atuacao as areaAtuacao', 'areaAtuacao.CO_AREA_ATUACAO = ind.CO_AREA_ATUACAO_ID');
+        $this->db->join('tb_legislacao', 'tb_legislacao.CO_SEQ_LEGISLACAO = ind.CO_SEQ_LEGISLACAO_ID');
+
+        if ($like) {
+            $this->db->like($like);
+        }
+        if(!is_null($distinct)){
+            $this->db->distinct($distinct);
+        }
+        if ($or_like) {
+            $this->db->or_like($or_like);
+        }
+        if ($order_by) {
+            $this->db->order_by($order_by);
+        }
+
+        if ($where) {
+            $this->db->where($where);
+        }
+
+        //$this->db->like('DS_TEXTO_MARCACAO', $search);
+        //$this->db->order_by('DS_TEXTO_MARCACAO','ASC');
+
+        return $this->db->get()->result();
+    }
+
 	public function countAll(){
 		return $this->db->count_all('tb_indexacao');
 	}

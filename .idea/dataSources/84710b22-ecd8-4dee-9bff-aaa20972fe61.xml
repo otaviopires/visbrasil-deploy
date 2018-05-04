@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="visbrasil@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.1">
+    <root id="1"/>
+    <schema id="2" parent="1" name="visbrasil">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="academia"/>
+    <schema id="4" parent="1" name="af_contabilidade"/>
+    <schema id="5" parent="1" name="angular_laravel_JWT"/>
+    <schema id="6" parent="1" name="apisippa"/>
+    <schema id="7" parent="1" name="blog_development"/>
+    <schema id="8" parent="1" name="blog_test"/>
+    <schema id="9" parent="1" name="crossfit"/>
+    <schema id="10" parent="1" name="csgbd"/>
+    <schema id="11" parent="1" name="db_CONFORTO"/>
+    <schema id="12" parent="1" name="ecomitiso3"/>
+    <schema id="13" parent="1" name="exacta"/>
+    <schema id="14" parent="1" name="hecommerce"/>
+    <schema id="15" parent="1" name="hgdoc"/>
+    <schema id="16" parent="1" name="hshop"/>
+    <schema id="17" parent="1" name="hstsys"/>
+    <schema id="18" parent="1" name="information_schema"/>
+    <schema id="19" parent="1" name="library"/>
+    <schema id="20" parent="1" name="lifan"/>
+    <schema id="21" parent="1" name="limpida"/>
+    <schema id="22" parent="1" name="loja"/>
+    <schema id="23" parent="1" name="multimeios_v2"/>
+    <schema id="24" parent="1" name="mysql"/>
+    <schema id="25" parent="1" name="mytasks"/>
+    <schema id="26" parent="1" name="performance_schema"/>
+    <schema id="27" parent="1" name="remediozap"/>
+    <schema id="28" parent="1" name="sippamobile"/>
+    <schema id="29" parent="1" name="siteaquapeixe"/>
+    <schema id="30" parent="1" name="social"/>
+    <schema id="31" parent="1" name="sware"/>
+    <schema id="32" parent="1" name="sys"/>
+    <schema id="33" parent="1" name="tcnol"/>
+    <schema id="34" parent="1" name="vcmix"/>
+    <schema id="35" parent="1" name="vcmix_"/>
+    <schema id="36" parent="1" name="wp_af"/>
+    <schema id="37" parent="1" name="wp_limpida"/>
+    <schema id="38" parent="1" name="wp_morr"/>
+    <schema id="39" parent="1" name="xfood"/>
+    <schema id="40" parent="1" name="yodabookstore"/>
+    <table id="41" parent="2" name="rl_vinculo_legislacao"/>
+    <table id="42" parent="2" name="tb_area_atuacao"/>
+    <table id="43" parent="2" name="tb_assunto"/>
+    <table id="44" parent="2" name="tb_indexacao"/>
+    <table id="45" parent="2" name="tb_indexacao_2"/>
+    <table id="46" parent="2" name="tb_legislacao"/>
+    <table id="47" parent="2" name="tb_orgao_emissor"/>
+    <table id="48" parent="2" name="tb_subassunto"/>
+    <table id="49" parent="2" name="tb_tema"/>
+    <table id="50" parent="2" name="tb_tipo_norma"/>
+    <table id="51" parent="2" name="textual_rel_tb_legislacao_0"/>
+    <table id="52" parent="2" name="textual_rel_tb_legislacao_1"/>
+    <table id="53" parent="2" name="usuario"/>
+    <column id="54" parent="41" name="CO_SEQ_LEGISLACAO_VINCULO">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="55" parent="41" name="CO_SEQ_LEGISLACAO_VINCULADA">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="56" parent="41" name="CO_TIPO_VINCULO">
+      <Position>3</Position>
+      <DataType>varchar(1)|0</DataType>
+    </column>
+    <index id="57" parent="41" name="CO_TIPO_VINCULO">
+      <ColNames>CO_TIPO_VINCULO</ColNames>
+    </index>
+    <key id="58" parent="41" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CO_SEQ_LEGISLACAO_VINCULO
+CO_SEQ_LEGISLACAO_VINCULADA</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="59" parent="42" name="CO_AREA_ATUACAO">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="42" name="DS_AREA_ATUACAO">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <key id="61" parent="42" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CO_AREA_ATUACAO</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="62" parent="43" name="CO_SEQ_ASSUNTO">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="63" parent="43" name="DS_ASSUNTO">
+      <Position>2</Position>
+      <DataType>varchar(70)|0</DataType>
+    </column>
+    <key id="64" parent="43" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CO_SEQ_ASSUNTO</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="65" parent="44" name="CO_SEQ_INDICE">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="66" parent="44" name="CO_SEQ_LEGISLACAO_ID">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="67" parent="44" name="CO_AREA_ATUACAO_ID">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="68" parent="44" name="CO_SEQ_ASSUNTO_ID">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="69" parent="44" name="CO_SEQ_SUBASSUNTO_ID">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="70" parent="44" name="CO_SEQ_TEMA_ID">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="71" parent="44" name="DS_TEXTO_MARCACAO">
+      <Position>7</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <index id="72" parent="44" name="CO_SEQ_SUBASSUNTO">
+      <ColNames>CO_SEQ_SUBASSUNTO_ID</ColNames>
+    </index>
+    <key id="73" parent="44" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CO_SEQ_INDICE</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="74" parent="45" name="CO_SEQ_INDICE">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="75" parent="45" name="CO_SEQ_LEGISLACAO_ID">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="76" parent="45" name="CO_AREA_ATUACAO_ID">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="77" parent="45" name="CO_SEQ_ASSUNTO_ID">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="78" parent="45" name="CO_SEQ_SUBASSUNTO_ID">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="79" parent="45" name="CO_SEQ_TEMA_ID">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="80" parent="45" name="DS_TEXTO_MARCACAO">
+      <Position>7</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="81" parent="45" name="CO_TIPO_NORMA_ID">
+      <Position>8</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="82" parent="45" name="DS_ASSUNTO">
+      <Position>9</Position>
+      <DataType>varchar(70)|0</DataType>
+    </column>
+    <column id="83" parent="45" name="DS_AREA_ATUACAO">
+      <Position>10</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="84" parent="45" name="DS_CONTEUDO">
+      <Position>11</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="85" parent="45" name="DS_SUBASSUNTO">
+      <Position>12</Position>
+      <DataType>varchar(70)|0</DataType>
+    </column>
+    <column id="86" parent="45" name="DS_TEMA">
+      <Position>13</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="87" parent="45" name="DS_TIPO_NORMA">
+      <Position>14</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <key id="88" parent="45" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CO_SEQ_INDICE</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="89" parent="46" name="CO_SEQ_LEGISLACAO">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="90" parent="46" name="CO_TIPO_NORMA_ID">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="91" parent="46" name="NU_NORMA">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="92" parent="46" name="CO_ORGAO_EMISSOR_ID">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="93" parent="46" name="NU_ANO_SANCAO">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="94" parent="46" name="DT_SANCAO">
+      <Position>6</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="95" parent="46" name="DT_PUBLICACAO">
+      <Position>7</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="96" parent="46" name="DS_EMENTA">
+      <Position>8</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="97" parent="46" name="DS_CONTEUDO">
+      <Position>9</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="98" parent="46" name="RN_TEXTUAL">
+      <Position>10</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="99" parent="46" name="RN_TEXTUAL">
+      <ColNames>RN_TEXTUAL</ColNames>
+    </index>
+    <key id="100" parent="46" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CO_SEQ_LEGISLACAO</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="101" parent="47" name="CO_ORGAO_EMISSOR">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="102" parent="47" name="NO_ORGAO_EMISSOR">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <index id="103" parent="47" name="NO_ORGAO_EMISSOR">
+      <ColNames>NO_ORGAO_EMISSOR</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="104" parent="47" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CO_ORGAO_EMISSOR</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="105" parent="47" name="NO_ORGAO_EMISSOR">
+      <ColNames>NO_ORGAO_EMISSOR</ColNames>
+      <UnderlyingIndexName>NO_ORGAO_EMISSOR</UnderlyingIndexName>
+    </key>
+    <column id="106" parent="48" name="CO_SEQ_SUBASSUNTO">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="107" parent="48" name="DS_SUBASSUNTO">
+      <Position>2</Position>
+      <DataType>varchar(70)|0</DataType>
+    </column>
+    <key id="108" parent="48" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CO_SEQ_SUBASSUNTO</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="109" parent="49" name="CO_SEQ_TEMA">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="110" parent="49" name="DS_TEMA">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <key id="111" parent="49" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CO_SEQ_TEMA</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="112" parent="50" name="CO_TIPO_NORMA">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="113" parent="50" name="DS_TIPO_NORMA">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <index id="114" parent="50" name="CO_TIPO_NORMA">
+      <ColNames>CO_TIPO_NORMA</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="115" parent="50" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CO_TIPO_NORMA</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="116" parent="50" name="CO_TIPO_NORMA">
+      <ColNames>CO_TIPO_NORMA</ColNames>
+      <UnderlyingIndexName>CO_TIPO_NORMA</UnderlyingIndexName>
+    </key>
+    <column id="117" parent="51" name="KT">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="118" parent="51" name="RN_TEXTUAL">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="119" parent="51" name="POS">
+      <Position>3</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <index id="120" parent="51" name="KT">
+      <ColNames>KT</ColNames>
+    </index>
+    <index id="121" parent="51" name="RN_TEXTUAL">
+      <ColNames>RN_TEXTUAL</ColNames>
+    </index>
+    <key id="122" parent="51" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>KT
+RN_TEXTUAL</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="123" parent="52" name="KT">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="124" parent="52" name="RN_TEXTUAL">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="125" parent="52" name="POS">
+      <Position>3</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <index id="126" parent="52" name="KT">
+      <ColNames>KT</ColNames>
+    </index>
+    <index id="127" parent="52" name="RN_TEXTUAL">
+      <ColNames>RN_TEXTUAL</ColNames>
+    </index>
+    <key id="128" parent="52" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>KT
+RN_TEXTUAL</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="129" parent="53" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="130" parent="53" name="nome">
+      <Position>2</Position>
+      <DataType>varchar(70)|0</DataType>
+    </column>
+    <column id="131" parent="53" name="email">
+      <Position>3</Position>
+      <DataType>varchar(70)|0</DataType>
+    </column>
+    <column id="132" parent="53" name="user">
+      <Position>4</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="133" parent="53" name="senha">
+      <Position>5</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="134" parent="53" name="status">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="135" parent="53" name="nivel">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="136" parent="53" name="created">
+      <Position>8</Position>
+      <DataType>timestamp|0</DataType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="137" parent="53" name="changed">
+      <Position>9</Position>
+      <DataType>timestamp|0</DataType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <key id="138" parent="53" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

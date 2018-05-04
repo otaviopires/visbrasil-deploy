@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
-	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.material.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.material.min.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css">
 	<!-- Favicon-->
 	<link rel="icon" href="<?= base_url(); ?>assets/imagens/favicon.ico" />
