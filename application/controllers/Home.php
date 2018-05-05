@@ -51,12 +51,8 @@ class Home extends CI_Controller {
         $query_text['DS_TEXTO_MARCACAO'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
         $query_text_or_like['tb_legislacao.DS_CONTEUDO'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
         $query_text_or_like['tb_legislacao.DS_EMENTA'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
-        $query_text_or_like['tb_area_atuacao.DS_AREA_ATUACAO'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
-        $query_text_or_like['tb_assunto.DS_ASSUNTO'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
-        $query_text_or_like['tb_subassunto.DS_SUBASSUNTO'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
-        $query_text_or_like['tb_tema.DS_TEMA'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
-        $query_text_or_like['tb_tipo_norma.DS_TIPO_TEMA'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
-
+        $query_text_or_like['ass1.DS_ASSUNTO'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $query_text_or_like['tema.DS_TEMA'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
 
         $legislacao['tb_legislacao.DS_CONTEUDO'] =  addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
         $legislacao['tb_legislacao.DS_EMENTA'] =  addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
@@ -78,7 +74,7 @@ class Home extends CI_Controller {
         $dados['normas']= $this->indexacao->get_tipo_norma($normas);
 
 
-	    $dados['all'] = $this->indexacao->search($query_text, null, $query_text, null, null, null, null);
+	    $dados['all'] = $this->indexacao->search($query_text, null, $query_text_or_like, null, null, null, null);
 
 	    $dados['search'] = $request["PESQUISE_ASSUNTO"];
 

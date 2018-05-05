@@ -651,7 +651,7 @@ document.getElementById('paramcheck').onchange = function() {
             buttons: [
                 {
                     extend: 'pdfHtml5',exportOptions: {
-                },orientation: 'portrait', pageSize: 'A4',text:'Gerar PDF', title:'TIPOS DE NORMAS',
+                },orientation: 'portrait', pageSize: 'A4',text:'Gerar PDF', title:'ASSUNTO E SUB-ASSUNTO',
                     customize: function ( doc ) {
                         //centralizar table
                         doc.defaultStyle.alignment = 'center';
