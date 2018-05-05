@@ -23,7 +23,7 @@ class Indexacao_model extends CI_Model{
 		// $this->db->join('tb_assunto', 'tb_assunto.CO_SEQ_ASSUNTO = tb_indexacao.CO_SEQ_ASSUNTO_ID');
 		// $this->db->join('tb_subassunto', 'tb_subassunto.CO_SEQ_SUBASSUNTO = tb_indexacao.CO_SEQ_SUBASSUNTO_ID');
 
-		$this->db->select('ind.*, ass1.DS_ASSUNTO ass1DS_ASSUNTO, ass2.DS_ASSUNTO ass2DS_ASSUNTO, tema.DS_TEMA temaDS_TEMA, areaAtuacao.DS_AREA_ATUACAO areaAtuacaoDS_AREA_ATUACAO');
+		$this->db->select('ind.*, ass1.DS_ASSUNTO ass1DS_ASSUNTO, ass2.DS_ASSUNTO ass2DS_ASSUNTO, tema.DS_TEMA temaDS_TEMA, areaAtuacao.DS_AREA_ATUACAO areaAtuacaoDS_AREA_ATUACAO, tb_legislacao.DS_CONTEUDO');
 		$this->db->from('tb_indexacao as ind');
 		$this->db->join('tb_assunto as ass1', 'ass1.CO_SEQ_ASSUNTO = ind.CO_SEQ_ASSUNTO_ID', 'left');
 		$this->db->join('tb_assunto as ass2', 'ass2.CO_SEQ_ASSUNTO = ind.CO_SEQ_SUBASSUNTO_ID', 'left');
@@ -72,12 +72,18 @@ class Indexacao_model extends CI_Model{
 		return $this->db->count_all('tb_indexacao');
 	}
 
-	public function get_tipo_norma(){
+	public function get_tipo_norma($like = array()){
+        if(!is_null($like)){
+            $this->db->like($like);
+        }
 		$query = $this->db->get('tb_tipo_norma');
 		return $query->result();
 	}
 
-	public function get_legislacao(){
+	public function get_legislacao($like = array()){
+        if(!is_null($like)){
+            $this->db->like($like);
+        }
 		$query = $this->db->get('tb_legislacao');
 		return $query->result();
 	}
@@ -87,22 +93,41 @@ class Indexacao_model extends CI_Model{
 		return $query->result();
 	}
 
-	public function get_areaAtuacao(){
+	public function get_areaAtuacao($like = array()){
+        if(!is_null($like)){
+            $this->db->like($like);
+        }
 		$query = $this->db->get('tb_area_atuacao');
 		return $query->result();
 	}
 
-	public function get_assunto(){
+	public function get_assunto($like = array()){
+        if(!is_null($like)){
+            $this->db->like($like);
+        }
 		$query = $this->db->get('tb_assunto');
 		return $query->result();
 	}
 
-	public function get_tema(){
+	public function get_subassunto($like = array()){
+        if(!is_null($like)){
+            $this->db->like($like);
+        }
+	    return $this->db->get('tb_subassunto')->result();
+    }
+
+	public function get_tema($like = array()){
+        if(!is_null($like)){
+            $this->db->like($like);
+        }
 		$query = $this->db->get('tb_tema');
 		return $query->result();
 	}
 
 	public function cadastroIndexacao($dados){
+        if(!is_null($like)){
+            $this->db->like($like);
+        }
 		$this->db->insert('tb_indexacao', $dados);
 	}
 

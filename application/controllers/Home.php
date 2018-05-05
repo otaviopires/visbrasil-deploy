@@ -12,13 +12,15 @@ class Home extends CI_Controller {
 
         $this->load->model('Indexacao_model', 'indexacao');
 
-        $dados['legislacoes'] = $this->indexacao->get_legislacao();
-        $dados['areaAtuacao'] = $this->indexacao->get_areaAtuacao();
-        $dados['assuntos'] = $this->indexacao->get_assunto();
-        $dados['subassuntos'] = $this->indexacao->get_assunto();
-        $dados['temas'] = $this->indexacao->get_tema();
-        $dados['normas']= $this->indexacao->get_tipo_norma();
+        $dados['legislacoes'] = $this->indexacao->get_legislacao(null);
+        $dados['areaAtuacao'] = $this->indexacao->get_areaAtuacao(null);
+        $dados['assuntos'] = $this->indexacao->get_assunto(null);
+        $dados['subassuntos'] = $this->indexacao->get_subassunto(null);
+        $dados['temas'] = $this->indexacao->get_tema(null);
+        $dados['normas']= $this->indexacao->get_tipo_norma(null);
         $dados['results'] = null;
+        $dados['all'] = $this->indexacao->get_indexacao(null);
+        $dados['search'] = null;
 
         $this->load->view('include/header_public');
 		$this->load->view('public/home', $dados);
@@ -38,48 +40,49 @@ class Home extends CI_Controller {
 	    //Melhorar abordagem
         $this->load->model('Indexacao_model', 'indexacao');
 
-        $dados['legislacoes'] = $this->indexacao->get_legislacao();
-        $dados['areaAtuacao'] = $this->indexacao->get_areaAtuacao();
-        $dados['assuntos'] = $this->indexacao->get_assunto();
-        $dados['subassuntos'] = $this->indexacao->get_assunto();
-        $dados['temas'] = $this->indexacao->get_tema();
-        $dados['normas']= $this->indexacao->get_tipo_norma();
-
         ini_set('display_errors', 0);
-
 
         $this->load->view('include/header_public');
 
 	    $request = $this->input->post();
 
         $query_text = array();
-        $where = array();
 
-        if(!is_null($request['PESQUISE_ASSUNTO'])){
-            $query_text['DS_TEXTO_MARCACAO'] =  addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
-        }
-        if(!is_null($request['legislacao'])){
-            $where['tb_legislacao.CO_SEQ_LEGISLACAO'] =  $request['legislacao'];
-        }
+        $query_text['DS_TEXTO_MARCACAO'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $query_text_or_like['tb_legislacao.DS_CONTEUDO'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $query_text_or_like['tb_legislacao.DS_EMENTA'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $query_text_or_like['tb_area_atuacao.DS_AREA_ATUACAO'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $query_text_or_like['tb_assunto.DS_ASSUNTO'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $query_text_or_like['tb_subassunto.DS_SUBASSUNTO'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $query_text_or_like['tb_tema.DS_TEMA'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $query_text_or_like['tb_tipo_norma.DS_TIPO_TEMA'] = addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
 
-        if(!is_null($request['areaAtuacao'])){
-            $where['areaAtuacao.CO_AREA_ATUACAO'] =  $request['areaAtuacao'];
-        }
 
-        if(!is_null($request['assunto'])){
-            $where['tb_assunto.CO_SEQ_ASSUNTO'] =  $request['assunto'];
-        }
+        $legislacao['tb_legislacao.DS_CONTEUDO'] =  addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $legislacao['tb_legislacao.DS_EMENTA'] =  addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $dados['legislacoes'] = $this->indexacao->get_legislacao($legislacao);
 
-        if(!is_null($request['subassunto'])){
-           $where['tb_legislacao.CO_SEQ_SUBASSUNTO'] =  $request['subassunto'];
-        }
+        $areaAtuacao['tb_area_atuacao.DS_AREA_ATUACAO'] =  addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $dados['areaAtuacao'] = $this->indexacao->get_areaAtuacao($areaAtuacao);
 
-        if(!is_null($request['tema'])){
-           $where['tb_tema.CO_SEQ_TEMA'] =  $request['tema'];
-        }
+        $assunto['tb_assunto.DS_ASSUNTO'] =  addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $dados['assuntos'] = $this->indexacao->get_assunto($assunto);
 
-	    $dados['results'] = $this->indexacao->search($query_text, null, null, null, null, null, $where);
-        $this->load->view('public/home', $dados);
+        $subassunto['tb_subassunto.DS_SUBASSUNTO'] =  addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $dados['subassuntos'] = $this->indexacao->get_subassunto($subassunto);
+
+        $tema['tb_tema.DS_TEMA'] =  addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $dados['temas'] = $this->indexacao->get_tema($tema);
+
+        $normas['tb_tipo_norma.DS_TIPO_NORMA'] =  addslashes(strip_tags($request["PESQUISE_ASSUNTO"]));
+        $dados['normas']= $this->indexacao->get_tipo_norma($normas);
+
+
+	    $dados['all'] = $this->indexacao->search($query_text, null, $query_text, null, null, null, null);
+
+	    $dados['search'] = $request["PESQUISE_ASSUNTO"];
+
+	    $this->load->view('public/home', $dados);
     }
 
 }
