@@ -39,10 +39,10 @@ class Indexacao_model extends CI_Model{
 
         $this->db->select('ind.*, ass1.DS_ASSUNTO ass1DS_ASSUNTO, ass2.DS_ASSUNTO ass2DS_ASSUNTO, tema.DS_TEMA temaDS_TEMA, areaAtuacao.DS_AREA_ATUACAO areaAtuacaoDS_AREA_ATUACAO, tb_legislacao.DS_CONTEUDO');
         $this->db->from('tb_indexacao as ind');
-        $this->db->join('tb_assunto as ass1', 'ass1.CO_SEQ_ASSUNTO = ind.CO_SEQ_ASSUNTO_ID');
-        $this->db->join('tb_assunto as ass2', 'ass2.CO_SEQ_ASSUNTO = ind.CO_SEQ_SUBASSUNTO_ID');
-        $this->db->join('tb_tema as tema', 'tema.CO_SEQ_TEMA = ind.CO_SEQ_TEMA_ID');
-        $this->db->join('tb_area_atuacao as areaAtuacao', 'areaAtuacao.CO_AREA_ATUACAO = ind.CO_AREA_ATUACAO_ID');
+        $this->db->join('tb_assunto as ass1', 'ass1.CO_SEQ_ASSUNTO = ind.CO_SEQ_ASSUNTO_ID', 'left');
+        $this->db->join('tb_assunto as ass2', 'ass2.CO_SEQ_ASSUNTO = ind.CO_SEQ_SUBASSUNTO_ID', 'left');
+        $this->db->join('tb_tema as tema', 'tema.CO_SEQ_TEMA = ind.CO_SEQ_TEMA_ID', 'left');
+        $this->db->join('tb_area_atuacao as areaAtuacao', 'areaAtuacao.CO_AREA_ATUACAO = ind.CO_AREA_ATUACAO_ID', 'left');
         $this->db->join('tb_legislacao', 'tb_legislacao.CO_SEQ_LEGISLACAO = ind.CO_SEQ_LEGISLACAO_ID');
 
         if ($like) {
@@ -88,6 +88,37 @@ class Indexacao_model extends CI_Model{
 		return $query->result();
 	}
 
+    public function get_legislacaoByID($limit, $start, $id){
+
+        $this->db->select('ind.*, tb_legislacao.DT_SANCAO, tb_legislacao.DT_PUBLICACAO, tb_legislacao.NU_NORMA, tb_legislacao.DS_EMENTA, tb_legislacao.DS_CONTEUDO ,CO_SEQ_INDICE, ass1.DS_ASSUNTO ass1DS_ASSUNTO, ass2.DS_ASSUNTO ass2DS_ASSUNTO, tema.DS_TEMA temaDS_TEMA, areaAtuacao.DS_AREA_ATUACAO areaAtuacaoDS_AREA_ATUACAO');
+
+        // $this->db->join('tb_area_atuacao', 'tb_area_atuacao.CO_AREA_ATUACAO = tb_indexacao.CO_AREA_ATUACAO_ID');
+        // $this->db->join('tb_assunto', 'tb_assunto.CO_SEQ_ASSUNTO = tb_indexacao.CO_SEQ_ASSUNTO_ID');
+        // $this->db->join('tb_subassunto', 'tb_subassunto.CO_SEQ_SUBASSUNTO = tb_indexacao.CO_SEQ_SUBASSUNTO_ID');
+        // $this->db->join('tb_tema', 'tb_tema.CO_SEQ_TEMA = tb_indexacao.CO_SEQ_TEMA_ID');
+
+        $this->db->join('tb_assunto as ass1', 'ass1.CO_SEQ_ASSUNTO = ind.CO_SEQ_ASSUNTO_ID', 'left');
+        $this->db->join('tb_assunto as ass2', 'ass2.CO_SEQ_ASSUNTO = ind.CO_SEQ_SUBASSUNTO_ID', 'left');
+        $this->db->join('tb_tema as tema', 'tema.CO_SEQ_TEMA = ind.CO_SEQ_TEMA_ID', 'left');
+        $this->db->join('tb_area_atuacao as areaAtuacao', 'areaAtuacao.CO_AREA_ATUACAO = ind.CO_AREA_ATUACAO_ID', 'left');
+        $this->db->join('tb_legislacao', 'tb_legislacao.CO_SEQ_LEGISLACAO = ind.CO_SEQ_LEGISLACAO_ID');
+        if(!is_null($limit)){
+            $this->db->limit($limit, $start);
+        }
+        $query = $this->db->get("tb_indexacao as ind");
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
+
+
+
 	public function get_indexacoes(){
 		$query = $this->db->get('tb_indexacao');
 		return $query->result();
@@ -125,9 +156,7 @@ class Indexacao_model extends CI_Model{
 	}
 
 	public function cadastroIndexacao($dados){
-        if(!is_null($like)){
-            $this->db->like($like);
-        }
+
 		$this->db->insert('tb_indexacao', $dados);
 	}
 
@@ -140,7 +169,7 @@ class Indexacao_model extends CI_Model{
 
 	public function getIndexacaoById($id = null){
 		if($id != null){
-			$this->db->select('ind.*, CO_SEQ_INDICE, ass1.DS_ASSUNTO ass1DS_ASSUNTO, ass2.DS_ASSUNTO ass2DS_ASSUNTO, tema.DS_TEMA temaDS_TEMA, areaAtuacao.DS_AREA_ATUACAO areaAtuacaoDS_AREA_ATUACAO');
+			$this->db->select('ind.*, CO_SEQ_INDICE, ass1.DS_ASSUNTO ass1DS_ASSUNTO, ass2.DS_ASSUNTO ass2DS_ASSUNTO, tema.DS_TEMA temaDS_TEMA, areaAtuacao.DS_AREA_ATUACAO areaAtuacaoDS_AREA_ATUACAO', 'tb_legislacao.DS_EMENTA', 'tb_legislacao.DS_CONTEUDO');
 
 			// $this->db->join('tb_area_atuacao', 'tb_area_atuacao.CO_AREA_ATUACAO = tb_indexacao.CO_AREA_ATUACAO_ID');
 			// $this->db->join('tb_assunto', 'tb_assunto.CO_SEQ_ASSUNTO = tb_indexacao.CO_SEQ_ASSUNTO_ID');
@@ -161,7 +190,143 @@ class Indexacao_model extends CI_Model{
 		}
 	}
 
-	public function editarIndexacao($dados = null, $id = null){
+    public function getIndexacaoById2($limit, $start, $id){
+
+            $this->db->select('ind.*, tb_legislacao.DS_EMENTA, tb_legislacao.DS_CONTEUDO ,CO_SEQ_INDICE, ass1.DS_ASSUNTO ass1DS_ASSUNTO, ass2.DS_ASSUNTO ass2DS_ASSUNTO, tema.DS_TEMA temaDS_TEMA, areaAtuacao.DS_AREA_ATUACAO areaAtuacaoDS_AREA_ATUACAO');
+
+            // $this->db->join('tb_area_atuacao', 'tb_area_atuacao.CO_AREA_ATUACAO = tb_indexacao.CO_AREA_ATUACAO_ID');
+            // $this->db->join('tb_assunto', 'tb_assunto.CO_SEQ_ASSUNTO = tb_indexacao.CO_SEQ_ASSUNTO_ID');
+            // $this->db->join('tb_subassunto', 'tb_subassunto.CO_SEQ_SUBASSUNTO = tb_indexacao.CO_SEQ_SUBASSUNTO_ID');
+            // $this->db->join('tb_tema', 'tb_tema.CO_SEQ_TEMA = tb_indexacao.CO_SEQ_TEMA_ID');
+
+            $this->db->join('tb_assunto as ass1', 'ass1.CO_SEQ_ASSUNTO = ind.CO_SEQ_ASSUNTO_ID', 'left');
+            $this->db->join('tb_assunto as ass2', 'ass2.CO_SEQ_ASSUNTO = ind.CO_SEQ_SUBASSUNTO_ID', 'left');
+            $this->db->join('tb_tema as tema', 'tema.CO_SEQ_TEMA = ind.CO_SEQ_TEMA_ID', 'left');
+            $this->db->join('tb_area_atuacao as areaAtuacao', 'areaAtuacao.CO_AREA_ATUACAO = ind.CO_AREA_ATUACAO_ID', 'left');
+            $this->db->join('tb_legislacao', 'tb_legislacao.CO_SEQ_LEGISLACAO = ind.CO_SEQ_LEGISLACAO_ID');
+
+            $this->db->where('ind.CO_SEQ_INDICE', $id);
+            if(!is_null($limit)){
+                $this->db->limit($limit, $start);
+            }
+
+            $query = $this->db->get('tb_indexacao as ind');
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $data[] = $row;
+                }
+                return $data;
+            }
+            return false;
+    }
+
+    public function getTipoNormaWithLegislacao($limit, $start, $id){
+
+        $this->db->join('tb_legislacao as l', 'l.CO_TIPO_NORMA_ID = CO_TIPO_NORMA');
+        $this->db->where('l.CO_TIPO_NORMA_ID', $id);
+        if(!is_null($limit)){
+            $this->db->limit($limit, $start);
+        }
+        $query = $this->db->get("tb_tipo_norma");
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
+    public function getAreaDeAtuacaoWithIndexacao($limit, $start, $id){
+
+        $this->db->select('ind.*, tb_legislacao.DS_EMENTA, tb_legislacao.DS_CONTEUDO ,CO_SEQ_INDICE, ass1.DS_ASSUNTO ass1DS_ASSUNTO, ass2.DS_ASSUNTO ass2DS_ASSUNTO, tema.DS_TEMA temaDS_TEMA, areaAtuacao.DS_AREA_ATUACAO areaAtuacaoDS_AREA_ATUACAO');
+
+        // $this->db->join('tb_area_atuacao', 'tb_area_atuacao.CO_AREA_ATUACAO = tb_indexacao.CO_AREA_ATUACAO_ID');
+        // $this->db->join('tb_assunto', 'tb_assunto.CO_SEQ_ASSUNTO = tb_indexacao.CO_SEQ_ASSUNTO_ID');
+        // $this->db->join('tb_subassunto', 'tb_subassunto.CO_SEQ_SUBASSUNTO = tb_indexacao.CO_SEQ_SUBASSUNTO_ID');
+        // $this->db->join('tb_tema', 'tb_tema.CO_SEQ_TEMA = tb_indexacao.CO_SEQ_TEMA_ID');
+
+        $this->db->join('tb_assunto as ass1', 'ass1.CO_SEQ_ASSUNTO = ind.CO_SEQ_ASSUNTO_ID', 'left');
+        $this->db->join('tb_assunto as ass2', 'ass2.CO_SEQ_ASSUNTO = ind.CO_SEQ_SUBASSUNTO_ID', 'left');
+        $this->db->join('tb_tema as tema', 'tema.CO_SEQ_TEMA = ind.CO_SEQ_TEMA_ID', 'left');
+        $this->db->join('tb_area_atuacao as areaAtuacao', 'areaAtuacao.CO_AREA_ATUACAO = ind.CO_AREA_ATUACAO_ID', 'left');
+        $this->db->join('tb_legislacao', 'tb_legislacao.CO_SEQ_LEGISLACAO = ind.CO_SEQ_LEGISLACAO_ID');
+        $this->db->where('ind.CO_AREA_ATUACAO_ID', $id);
+        if(!is_null($limit)){
+            $this->db->limit($limit, $start);
+        }
+        $query = $this->db->get("tb_indexacao as ind");
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
+    public function getTemaWithIndexacao($limit, $start, $id){
+
+        $this->db->select('ind.*, tb_legislacao.DS_EMENTA, tb_legislacao.DS_CONTEUDO ,CO_SEQ_INDICE, ass1.DS_ASSUNTO ass1DS_ASSUNTO, ass2.DS_ASSUNTO ass2DS_ASSUNTO, tema.DS_TEMA temaDS_TEMA, areaAtuacao.DS_AREA_ATUACAO areaAtuacaoDS_AREA_ATUACAO');
+
+        // $this->db->join('tb_area_atuacao', 'tb_area_atuacao.CO_AREA_ATUACAO = tb_indexacao.CO_AREA_ATUACAO_ID');
+        // $this->db->join('tb_assunto', 'tb_assunto.CO_SEQ_ASSUNTO = tb_indexacao.CO_SEQ_ASSUNTO_ID');
+        // $this->db->join('tb_subassunto', 'tb_subassunto.CO_SEQ_SUBASSUNTO = tb_indexacao.CO_SEQ_SUBASSUNTO_ID');
+        // $this->db->join('tb_tema', 'tb_tema.CO_SEQ_TEMA = tb_indexacao.CO_SEQ_TEMA_ID');
+
+        $this->db->join('tb_assunto as ass1', 'ass1.CO_SEQ_ASSUNTO = ind.CO_SEQ_ASSUNTO_ID', 'left');
+        $this->db->join('tb_assunto as ass2', 'ass2.CO_SEQ_ASSUNTO = ind.CO_SEQ_SUBASSUNTO_ID', 'left');
+        $this->db->join('tb_tema as tema', 'tema.CO_SEQ_TEMA = ind.CO_SEQ_TEMA_ID', 'left');
+        $this->db->join('tb_area_atuacao as areaAtuacao', 'areaAtuacao.CO_AREA_ATUACAO = ind.CO_AREA_ATUACAO_ID', 'left');
+        $this->db->join('tb_legislacao', 'tb_legislacao.CO_SEQ_LEGISLACAO = ind.CO_SEQ_LEGISLACAO_ID');
+        $this->db->where('ind.CO_SEQ_TEMA_ID', $id);
+        if(!is_null($limit)){
+            $this->db->limit($limit, $start);
+        }
+        $query = $this->db->get("tb_indexacao as ind");
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
+
+    public function getAssuntoORSubAssuntoWithIndexacao($limit, $start, $id){
+
+        $this->db->select('ind.*, tb_legislacao.DS_EMENTA, tb_legislacao.DS_CONTEUDO ,CO_SEQ_INDICE, ass1.DS_ASSUNTO ass1DS_ASSUNTO, ass2.DS_ASSUNTO ass2DS_ASSUNTO, tema.DS_TEMA temaDS_TEMA, areaAtuacao.DS_AREA_ATUACAO areaAtuacaoDS_AREA_ATUACAO');
+
+        // $this->db->join('tb_area_atuacao', 'tb_area_atuacao.CO_AREA_ATUACAO = tb_indexacao.CO_AREA_ATUACAO_ID');
+        // $this->db->join('tb_assunto', 'tb_assunto.CO_SEQ_ASSUNTO = tb_indexacao.CO_SEQ_ASSUNTO_ID');
+        // $this->db->join('tb_subassunto', 'tb_subassunto.CO_SEQ_SUBASSUNTO = tb_indexacao.CO_SEQ_SUBASSUNTO_ID');
+        // $this->db->join('tb_tema', 'tb_tema.CO_SEQ_TEMA = tb_indexacao.CO_SEQ_TEMA_ID');
+
+        $this->db->join('tb_assunto as ass1', 'ass1.CO_SEQ_ASSUNTO = ind.CO_SEQ_ASSUNTO_ID', 'left');
+        $this->db->join('tb_assunto as ass2', 'ass2.CO_SEQ_ASSUNTO = ind.CO_SEQ_SUBASSUNTO_ID', 'left');
+        $this->db->join('tb_tema as tema', 'tema.CO_SEQ_TEMA = ind.CO_SEQ_TEMA_ID', 'left');
+        $this->db->join('tb_area_atuacao as areaAtuacao', 'areaAtuacao.CO_AREA_ATUACAO = ind.CO_AREA_ATUACAO_ID', 'left');
+        $this->db->join('tb_legislacao', 'tb_legislacao.CO_SEQ_LEGISLACAO = ind.CO_SEQ_LEGISLACAO_ID');
+        $this->db->where('ind.CO_SEQ_ASSUNTO_ID', $id);
+        if(!is_null($limit)){
+            $this->db->limit($limit, $start);
+        }
+        $query = $this->db->get('tb_indexacao as ind');
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
+    public function editarIndexacao($dados = null, $id = null){
 		if($dados != null && $id != null){
 			$this->db->update('tb_indexacao', $dados, array('CO_SEQ_INDICE' => $id));
 		}

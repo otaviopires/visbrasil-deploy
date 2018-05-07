@@ -53,7 +53,7 @@
                             <?php
                             foreach ($normas as $result):
                                 echo
-                                    '<tr>'.
+                                    '<tr style="cursor: pointer;" onclick="setVisualization(' . $result->CO_TIPO_NORMA . ', 1)">'.
                                     '<td>' . $result->CO_TIPO_NORMA .'</td>' .
                                     '<td>' . mb_strimwidth($result->DS_TIPO_NORMA, 0, 20, "...") . '</td>' .
                                     '</tr>'
@@ -81,7 +81,7 @@
                             <?php
                             foreach ($legislacoes as $result):
                                 echo
-                                    '<tr>'.
+                                    '<tr style="cursor: pointer;" onclick="setVisualization(' . $result->CO_SEQ_LEGISLACAO . ', 2)">'.
                                     '<td>' . date('d/m/Y', strtotime($result->DT_SANCAO)) .'</td>' .
                                     '<td>' . date('d/m/Y', strtotime($result->DT_PUBLICACAO)) . '</td>' .
                                     '<td>' . mb_strimwidth($result->DS_EMENTA, 0, 20, "...") . '</td>' .
@@ -117,7 +117,7 @@
                                     <?php
                                     foreach ($assuntos as $result):
                                         echo
-                                            '<tr>'.
+                                            '<tr style="cursor: pointer;" onclick="setVisualization(' . $result->CO_SEQ_ASSUNTO . ', 4)">'.
                                             '<td>' . $result->CO_SEQ_ASSUNTO .'</td>' .
                                             '<td>' . mb_strimwidth($result->DS_ASSUNTO, 0, 20, "...") . '</td>'
                                             .'</tr>'
@@ -143,7 +143,7 @@
                                     <?php
                                     foreach ($subassuntos as $result):
                                         echo
-                                            '<tr>'.
+                                            '<tr style="cursor: pointer;" onclick="setVisualization(' . $result->CO_SEQ_SUBASSUNTO . ', 5)">'.
                                             '<td>' . $result->CO_SEQ_SUBASSUNTO.'</td>' .
                                             '<td>' . mb_strimwidth($result->DS_SUBASSUNTO, 0, 20, "...") . '</td>'.
                                             '</tr>'
@@ -171,7 +171,7 @@
                             <?php
                             foreach ($areaAtuacao as $result):
                                 echo
-                                    '<tr>'.
+                                    '<tr style="cursor: pointer;" onclick="setVisualization(' . $result->CO_AREA_ATUACAO . ', 3)">'.
                                     '<td>' . $result->CO_AREA_ATUACAO .'</td>' .
                                     '<td>' . mb_strimwidth($result->DS_AREA_ATUACAO, 0, 20, "...") . '</td>' .
                                     '</tr>'
@@ -197,7 +197,7 @@
                             <?php
                             foreach ($temas as $result):
                                 echo
-                                    '<tr>'.
+                                    '<tr style="cursor: pointer;" onclick="setVisualization(' . $result->CO_SEQ_TEMA . ', 6)">'.
                                     '<td>' . $result->CO_SEQ_TEMA .'</td>' .
                                     '<td>' . mb_strimwidth($result->DS_TEMA, 0, 20, "...") . '</td>' .
                                     '</tr>'
@@ -226,7 +226,7 @@
                             <?php
                             foreach ($all as $result):
                                 echo
-                                    '<tr>'.
+                                    '<tr style="cursor: pointer;" onclick="setVisualization(' . $result->CO_SEQ_INDICE . ', 7)">'.
                                     '<td>' . mb_strimwidth($result->DS_TEXTO_MARCACAO, 0, 20, "...") .'</td>' .
                                     '<td>' . mb_strimwidth($result->DS_CONTEUDO, 0, 20, "...") . '</td>' .
                                     '<td>' . mb_strimwidth($result->temaDS_TEMA, 0, 20, "...") . '</td>' .
@@ -256,7 +256,7 @@
                                 <?php
                                 foreach ($all as $result):
                                     echo
-                                        '<tr>'.
+                                        '<tr style="cursor: pointer;" onclick="setVisualization(' . $result->CO_SEQ_INDICE . ', 7)">'.
                                         '<td>' . mb_strimwidth($result->DS_TEXTO_MARCACAO, 0, 20, "...") .'</td>' .
                                         '<td>' . mb_strimwidth($result->DS_CONTEUDO, 0, 20, "...") . '</td>' .
                                         '<td>' . mb_strimwidth($result->temaDS_TEMA, 0, 20, "...") . '</td>' .
@@ -454,6 +454,11 @@ document.getElementById('paramcheck').onchange = function() {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <script>
+
+    function setVisualization($id, $table) {
+        window.location.href = 'Home/visualization/' +  $id + '/' + $table;
+    }
+
     $(document).ready(function () {
         //cria o rodapé com data e horário
         var d = new Date();

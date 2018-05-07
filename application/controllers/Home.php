@@ -3,6 +3,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
 
+    CONST TB_AREA_ATUACAO = 3;
+    CONST TB_ASSUNTO = 4;
+    CONST TB_INDEXACAO = 7;
+    CONST TB_LEGISLACAO = 2;
+    CONST TB_SUBASSUNTO = 5;
+    CONST TB_TEMA = 6;
+    CONST TB_TIPO_NORMA = 1;
+
+    public function getTableName(){
+        return [
+            self::TB_AREA_ATUACAO => 'tb_area_atuacao',
+            self::TB_ASSUNTO => 'tb_assunto',
+            self::TB_INDEXACAO => 'tb_indexacao',
+            self::TB_LEGISLACAO => 'tb_legislacao',
+            self::TB_SUBASSUNTO => 'tb_subassunto',
+            self::TB_TEMA => 'tb_tema',
+            self::TB_TIPO_NORMA => 'tb_tipo_norma',
+        ];
+
+    }
+
+    public function getNiceNameTable(){
+        return [
+            self::TB_AREA_ATUACAO => 'Área de Atuação',
+            self::TB_ASSUNTO => 'Assunto',
+            self::TB_INDEXACAO => 'Indexação',
+            self::TB_LEGISLACAO => 'Legislacao',
+            self::TB_SUBASSUNTO => 'Sub-assunto',
+            self::TB_TEMA => 'Tema',
+            self::TB_TIPO_NORMA => 'Tipo de Norma',
+        ];
+
+    }
+
+
+    public function getTable($tableID){
+        return self::getTableName()[$tableID];
+    }
+
 	public function index(){
 
 		//$search = $this->input->post('PESQUISE_ASSUNTO');
@@ -79,6 +118,66 @@ class Home extends CI_Controller {
 	    $dados['search'] = $request["PESQUISE_ASSUNTO"];
 
 	    $this->load->view('public/home', $dados);
+    }
+
+
+    public function visualization(){
+
+	    $this->load->view('include/header_public');
+        $this->load->model('Indexacao_model', 'indexacao');
+        $config = array();
+        //ID
+        $id = $this->uri->segment(3);
+
+        //TABLE
+        $table = $this->getTable($this->uri->segment(4));
+
+        $page = ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
+        $config["per_page"] = 6;
+
+
+        if($table == 'tb_tipo_norma'){
+            $config["total_rows"] = count($this->indexacao->getTipoNormaWithLegislacao(null, 0, $id));
+            $dados["results"] =  $this->indexacao->getTipoNormaWithLegislacao($config["per_page"], $page, $id);
+
+        }
+
+        if($table == 'tb_legislacao'){
+            $config["total_rows"] = count($this->indexacao->get_legislacaoByID(null, 0, $id));
+            $dados["results"] =  $this->indexacao->get_legislacaoByID($config["per_page"], $page, $id);
+
+        }
+
+        if($table == 'tb_area_atuacao'){
+            $config["total_rows"] = count($this->indexacao->getAreaDeAtuacaoWithIndexacao(null, 0, $id));
+            $dados["results"] =  $this->indexacao->getAreaDeAtuacaoWithIndexacao($config["per_page"], $page, $id);
+        }
+
+        if($table == 'tb_assunto' || $table == 'tb_subassunto'){
+            $config["total_rows"] = count($this->indexacao->getAssuntoORSubAssuntoWithIndexacao(null, 0, $id));
+            $dados["results"] =  $this->indexacao->getAssuntoORSubAssuntoWithIndexacao($config["per_page"], $page, $id);
+        }
+
+        if($table == 'tb_tema'){
+            $config["total_rows"] = count($this->indexacao->getTemaWithIndexacao(null, 0, $id));
+            $dados["results"] =  $this->indexacao->getTemaWithIndexacao($config["per_page"], $page, $id);
+        }
+
+        if($table == 'tb_indexacao'){
+            $config["total_rows"] = count($this->indexacao->getIndexacaoById2(null, 0, $id));
+            $dados["results"] =  $this->indexacao->getIndexacaoById2($config["per_page"], $page, $id);
+        }
+
+        $config["base_url"] = base_url() . "Home/visualization/" . $id . "/" . $this->uri->segment(4);
+        $config["uri_segment"] = 5;
+
+        $this->pagination->initialize($config);
+
+        $dados["links"] = $this->pagination->create_links();
+        $dados['table'] = $table;
+        $dados['niceTable'] = self::getNiceNameTable()[$this->uri->segment(4)];
+
+        $this->load->view('public/resultado', $dados);
     }
 
 }

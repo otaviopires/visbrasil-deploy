@@ -36,7 +36,7 @@
 									<option value="" disabled selected>Legislação</option>
 									<?php foreach($legislacoes as $legislacao){?>
 									<option value="<?= $legislacao->CO_SEQ_LEGISLACAO?>">
-										<?= $legislacao->RN_TEXTUAL?>
+										<?= mb_strimwidth($legislacao->DS_CONTEUDO, 0, 50, '...')?>
 									</option>
 									<?php } ?>
 								</select>

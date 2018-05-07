@@ -30,11 +30,11 @@
 									if($legislacao->CO_SEQ_LEGISLACAO==$indexacao->CO_SEQ_LEGISLACAO_ID){
 								?>
 								<option value="<?= $legislacao->CO_SEQ_LEGISLACAO?>" selected>
-									<?= $legislacao->CO_SEQ_LEGISLACAO?>
+									<?= mb_strimwidth($legislacao->DS_CONTEUDO, 0, 50, '...')?>
 								</option>
 									<?php } else{?>
 								<option value="<?= $legislacao->CO_SEQ_LEGISLACAO?>">
-									<?= $legislacao->CO_SEQ_LEGISLACAO?>
+									<?= mb_strimwidth($legislacao->DS_CONTEUDO, 0, 50, '...')?>
 								</option>
 							<?php } }?>
 						</select>

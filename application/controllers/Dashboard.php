@@ -36,7 +36,7 @@ class Dashboard extends CI_Controller {
 			$dados['id'] = $data['usuario'][0]->id;
 			$dados['logado'] = true;
 			$this->session->set_userdata($dados);
-			redirect('Dashboard'); 
+            redirect('Dashboard');
 		} else{
 			redirect('dashboard/login');
 		}
