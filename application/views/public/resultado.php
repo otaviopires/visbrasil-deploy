@@ -4,6 +4,8 @@
     <div class="mdl-cell mdl-cell--12-col">
         <div class="results-section">
             <h4>FILTRO POR TABELA - <?php echo $niceTable; ?></h4>
+            <a class="pull-right" href="http://www4.planalto.gov.br/legislacao/" target="_blank">Ver mais</a>
+            <br>
             <div>
                 <?php if($table == 'tb_tipo_norma'): ?>
                     <?php
@@ -16,7 +18,7 @@
                          <div class="panel-heading" role="tab" id="headingOne">
                            <h4 class="panel-title">
                              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'.$result->NU_NORMA.'" aria-expanded="true" aria-controls="collapse'.$result->NU_NORMA.'">
-                                 '.$result->DS_TIPO_NORMA .' - NU_NORMA ('.$result->NU_NORMA.')
+                                 '.$result->DS_TIPO_NORMA. ' Nº '. $result->NU_NORMA.', DE '. date('d/m/Y', strtotime($result->DT_PUBLICACAO)).'
                              </a>
                              	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;<a href="#" onclick="print('.$result->NU_NORMA.')"><span class="glyphicon glyphicon-print"></span></a>
                            </h4>

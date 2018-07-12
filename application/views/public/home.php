@@ -42,11 +42,13 @@
                 <div class="collapse" id="normas">
                     <br>
                     <div class="well">
+                        <a class="pull-right" href="http://www4.planalto.gov.br/legislacao/" target="_blank">Ver mais</a>
+                        <br>
                         <table id="results" class="mdl-data-table">
                             <thead>
                             <tr>
-                                <th>CO_TIPO_NORMA</th>
-                                <th>DS_TIPO_NORMA</th>
+                                <th>CÓDIGO</th>
+                                <th>NORMA</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -68,13 +70,15 @@
                 <div class="collapse" id="legislacao">
                     <br>
                     <div class="well">
+                        <a class="pull-right" href="http://www4.planalto.gov.br/legislacao/" target="_blank">Ver mais</a>
+                        <br>
                         <table id="leg" class="mdl-data-table">
                             <thead>
                             <tr>
-                                <th>DT_SANCAO</th>
-                                <th>DT_PUBLICACAO</th>
-                                <th>DS_EMENTA</th>
-                                <th>DS_CONTEUDO</th>
+                                <!--<th>SANÇÃO</th>-->
+                                <th>PUBLICAÇÃO</th>
+                                <th>EMENTA</th>
+                                <th>CONTEÚDO</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -82,7 +86,7 @@
                             foreach ($legislacoes as $result):
                                 echo
                                     '<tr style="cursor: pointer;" onclick="setVisualization(' . $result->CO_SEQ_LEGISLACAO . ', 2)">'.
-                                    '<td>' . date('d/m/Y', strtotime($result->DT_SANCAO)) .'</td>' .
+                                    '<!--<td>' . date('d/m/Y', strtotime($result->DT_SANCAO)) .'</td>-->' .
                                     '<td>' . date('d/m/Y', strtotime($result->DT_PUBLICACAO)) . '</td>' .
                                     '<td>' . mb_strimwidth($result->DS_EMENTA, 0, 20, "...") . '</td>' .
                                     '<td>' . mb_strimwidth($result->DS_CONTEUDO, 0, 20, "...") . '</td>' .
@@ -98,6 +102,8 @@
                 <div class="collapse" id="assuntoesub">
                     <br>
                     <div class="well">
+                        <a class="pull-right" href="http://www4.planalto.gov.br/legislacao/" target="_blank">Ver mais</a>
+                        <br>
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active"><a href="#ass" aria-controls="ass" role="tab" data-toggle="tab">Assunto</a></li>
                             <li role="presentation"><a href="#subass" aria-controls="subass" role="tab" data-toggle="tab">Sub-assunto</a></li>
@@ -109,8 +115,8 @@
                                 <table id="as" class="mdl-data-table">
                                     <thead>
                                     <tr>
-                                        <th>CO_SEQ_ASSUNTO</th>
-                                        <th>DS_ASSUNTO</th>
+                                        <th>CÓDIGO</th>
+                                        <th>ASSUNTO</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -135,8 +141,8 @@
                                     <thead>
                                     <tr>
 
-                                        <th>CO_SEQ_SUBASSUNTO</th>
-                                        <th>DS_SUBASSUNTO</th>
+                                        <th>CÓDIGO</th>
+                                        <th>SUBASSUNTO</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -160,11 +166,13 @@
                 <div class="collapse" id="art">
                     <br>
                     <div class="well">
+                        <a class="pull-right" href="http://www4.planalto.gov.br/legislacao/" target="_blank">Ver mais</a>
+                        <br>
                         <table id="ara" class="mdl-data-table">
                             <thead>
                             <tr>
-                                <th>CO_AREA_ATUACAO</th>
-                                <th>DS_AREA_ATUACAO</th>
+                                <th>CÓDIGO</th>
+                                <th>ÁREA DE ATUAÇÃO</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -186,11 +194,13 @@
                 <div class="collapse" id="tema">
                     <br>
                     <div class="well">
+                        <a class="pull-right" href="http://www4.planalto.gov.br/legislacao/" target="_blank">Ver mais</a>
+                        <br>
                         <table id="tm" class="mdl-data-table">
                             <thead>
                             <tr>
-                                <th>CO_SEQ_TEMA</th>
-                                <th>DS_TEMA</th>
+                                <th>CÓDIGO</th>
+                                <th>TEMA</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -212,14 +222,16 @@
                 <div style="width: 1000px !important;" class="collapse" id="todos">
                     <br>
                     <div class="well">
+                        <a class="pull-right" href="http://www4.planalto.gov.br/legislacao/" target="_blank">Ver mais</a>
+                        <br>
                         <table id="all" class="mdl-data-table">
                             <thead>
                             <tr>
-                                <th>DS_TEXTO_MARCACAO</th>
-                                <th>DS_CONTEUDO (LEGISLAÇÃO)</th>
-                                <th>DS_TEMA</th>
-                                <th>DS_ASSUNTO</th>
-                                <th>DS_SUBASSUNTO</th>
+                                <th>TEXTO MARCAÇÃO</th>
+                                <th>CONTEÚDO (LEGISLAÇÃO)</th>
+                                <th>TEMA</th>
+                                <th>ASSUNTO</th>
+                                <th>SUBASSUNTO</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -241,15 +253,18 @@
                     </div>
                 </div>
                     <?php else: ?>
-                        <div style="width: 1000px !important;" id="todos-s"  class="well"> <br><br>
+
+                        <div style="width: 1000px !important;" id="todos-s"  class="well">
+                            <a class="pull-right" href="http://www4.planalto.gov.br/legislacao/" target="_blank">Ver mais</a>
+                            <br>
                             <table id="all" class="mdl-data-table">
                                 <thead>
                                 <tr>
-                                    <th>DS_TEXTO_MARCACAO</th>
-                                    <th>DS_CONTEUDO (LEGISLAÇÃO)</th>
-                                    <th>DS_TEMA</th>
-                                    <th>DS_ASSUNTO</th>
-                                    <th>DS_SUBASSUNTO</th>
+                                    <!--<th>TEXTO MARCAÇÃO</th>
+                                    <th>CONTEÚDO (LEGISLAÇÃO)</th>
+                                    <th>TEMA</th>-->
+                                    <th>ASSUNTO</th>
+                                    <th>SUBASSUNTO</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -257,9 +272,9 @@
                                 foreach ($all as $result):
                                     echo
                                         '<tr style="cursor: pointer;" onclick="setVisualization(' . $result->CO_SEQ_INDICE . ', 7)">'.
-                                        '<td>' . mb_strimwidth($result->DS_TEXTO_MARCACAO, 0, 20, "...") .'</td>' .
+                                        '<!--<td>' . mb_strimwidth($result->DS_TEXTO_MARCACAO, 0, 20, "...") .'</td>' .
                                         '<td>' . mb_strimwidth($result->DS_CONTEUDO, 0, 20, "...") . '</td>' .
-                                        '<td>' . mb_strimwidth($result->temaDS_TEMA, 0, 20, "...") . '</td>' .
+                                        '<td>' . mb_strimwidth($result->temaDS_TEMA, 0, 20, "...") . '</td>-->' .
                                         '<td>' . mb_strimwidth($result->ass1DS_ASSUNTO, 0, 20, "...") . '</td>' .
                                         '<td>' . mb_strimwidth($result->ass2DS_ASSUNTO, 0, 20, "...") . '</td>' .
                                         '</tr>'
@@ -525,6 +540,9 @@ document.getElementById('paramcheck').onchange = function() {
 
         $('#results').dataTable({
             dom: 'Bfrtip',
+            language:{
+                url : "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+            },
             buttons: [
                 {
                     extend: 'pdfHtml5',exportOptions: {
@@ -553,10 +571,14 @@ document.getElementById('paramcheck').onchange = function() {
 
                 }
             ]
+
         });
 
         $('#all').dataTable({
             dom: 'Bfrtip',
+            language:{
+                url : "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+            },
             buttons: [
                 {
                     extend: 'pdfHtml5',exportOptions: {
@@ -589,6 +611,9 @@ document.getElementById('paramcheck').onchange = function() {
 
         $('#leg').dataTable({
             dom: 'Bfrtip',
+            language:{
+                url : "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+            },
             buttons: [
                 {
                     extend: 'pdfHtml5',exportOptions: {
@@ -621,6 +646,9 @@ document.getElementById('paramcheck').onchange = function() {
 
         $('#ara').dataTable({
             dom: 'Bfrtip',
+            language:{
+                url : "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+            },
             buttons: [
                 {
                     extend: 'pdfHtml5',exportOptions: {
@@ -653,6 +681,9 @@ document.getElementById('paramcheck').onchange = function() {
 
         $('#as').dataTable({
             dom: 'Bfrtip',
+            language:{
+                url : "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+            },
             buttons: [
                 {
                     extend: 'pdfHtml5',exportOptions: {
@@ -685,6 +716,9 @@ document.getElementById('paramcheck').onchange = function() {
 
         $('#subas').dataTable({
             dom: 'Bfrtip',
+            language:{
+                url : "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+            },
             buttons: [
                 {
                     extend: 'pdfHtml5',exportOptions: {
@@ -717,6 +751,9 @@ document.getElementById('paramcheck').onchange = function() {
 
         $('#tm').dataTable({
             dom: 'Bfrtip',
+            language:{
+                url : "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+            },
             buttons: [
                 {
                     extend: 'pdfHtml5',exportOptions: {
